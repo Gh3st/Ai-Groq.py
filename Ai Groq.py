@@ -1,14 +1,23 @@
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
+# Carrega as variáveis do arquivo .env
+load_dotenv()
+
+# Pega a chave da variável de ambiente
+api_key = os.getenv("GROQ_API_KEY")
+
+# Usa a chave no client
 client = OpenAI(
-    base_url="https://api.groq.com/openai/v1",  # Endpoint da Groq
-    api_key="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"            # Substitua pela sua chave
+    base_url="https://api.groq.com/openai/v1",
+    api_key=api_key
 )
 
 response = client.chat.completions.create(
-    model="llama3-8b-8192",  # Pode usar também llama3-70b-8192
+    model="llama3-8b-8192",
     messages=[
-        {"role": "user", "content": "Me explique o que é buraco negro."}
+        {"role": "user", "content": "Me explique o que é o buraco negro."}
     ]
 )
 
